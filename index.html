@@ -19,6 +19,12 @@
       margin: 0;
       padding: 25px;
       box-sizing: border-box;
+      font: 35px/1.25 Manrope;
+
+    }
+
+    p {
+      font: 20px/1.5 Manrope;
     }
 
     .logo {
@@ -33,25 +39,68 @@
       background-image: url(logo-white.png);
     }
 
-
     .container {
       display: flex;
       height: 100%;
       flex-direction: column;
-      align-items:stretch;
-      justify-content:space-between;
+      align-items: stretch;
+      justify-content: space-between;
     }
 
-    .container .text-box {
-      font: 3.4vw/1.25 Manrope;
+    .text-box {
+      max-width: 1000px;
+    }
+
+    .footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .cont {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .cont a {
+      border-radius: 4px;
+      border: 2px solid #000;
+      padding: 20px;
+      align-content: center;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .cont a:hover, .cont a:active {
+      background-color: #FFE12E;
+      border-color: #FFE12E;
+      color: #fff;
+    }
+
+    @media only screen and (max-width: 800px) {
+      .footer {
+        flex-direction: column;
+        align-items: baseline;
+      }
+
+      .cont {
+        margin-top: 25px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">  <div class="logo"></div>
-    <div class="text-box">Opener tar tillvara på digital expertis genom att (i) leda digitala projekt, (ii) svara på remisser, och (iii) fortbilda inom civic tech.</div>
+  <div class="container">
+    <div class="logo"></div>
+    <div class="footer">
+      <div class="text-box">Opener tar tillvara på digital expertis genom att (i) leda digitala projekt, (ii) svara på remisser, och (iii) fortbilda inom civic tech.</div>
+      <div class="cont">
+        <a href="">Fortsätt</a>
+      </div>
+    </div>
   </div>
 
 </body>
