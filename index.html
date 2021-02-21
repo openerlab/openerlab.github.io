@@ -16,38 +16,36 @@
 
     body {
       margin: 0;
+      padding: 25px;
+      box-sizing: border-box;
     }
 
     .logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 100px;
-      height: 100px;
+      width: 20%;
+      height: 20%;
       background-image: url(logo-yellow.png);
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .container {
       display: flex;
-      font-family: Manrope;
-      font-size: 3.3vw;
-      align-items: center;
-      justify-content: center;
       height: 100%;
+      flex-direction: column;
+      align-items:stretch;
+      justify-content:space-between;
     }
 
-    .container .box {
-      width: 90%;
-      max-width: 1000px;
+    .container .text-box {
+      font: 3.4vw/1.25 Manrope;
     }
   </style>
 </head>
 
 <body>
-  <div class="logo"></div>
-  <div class="container">
-    <div class="box">Opener aktiverar digital expertis utanför privat sektor genom att (i) sjösätta nonprofitprojekt och söka statliga bidrag för dessa, (ii) svara på remiss vid upphandlingar av
+
+  <div class="container">  <div class="logo"></div>
+    <div class="text-box">Opener aktiverar digital expertis genom att (i) leda digitala nonprofit-projekt, (ii) svara på remisser gällande
       digitala lösningar, och (iii) fortbilda våra medlemmar inom civic tech.</div>
   </div>
 
