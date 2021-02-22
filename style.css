@@ -8,7 +8,7 @@ body {
   margin: 0;
   background: #F5F5F5;
   padding: 25px;
-  font: 3vw/1.25 Manrope;
+  font: 2.5vw/1.4 Manrope;
 }
 p {
   font: 20px/1.5 Manrope;
@@ -41,8 +41,8 @@ a.cont {
   flex: 0 0 33%;
   align-items: center;
   justify-content: center;
-  border: 0.3vw solid #000;
-  border-radius: 4px;
+  border: 0.25vw solid #000;
+  border-radius: 2px;
   color: #000;
   text-decoration: none;
 }
