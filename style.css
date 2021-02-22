@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+html,
+body {
+  height: 100%;
+}
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background: #F5F5F5;
+  padding: 25px;
+  font: 3vw/1.25 Manrope;
+}
+p {
+  font: 20px/1.5 Manrope;
+}
+.logo {
+  background-image: url(logo-yellow.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20%;
+  height: 20%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+}
+.text-box {
+  margin-right: 5%;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
+a.cont {
+  display: flex;
+  flex: 0 0 33%;
+  align-items: center;
+  justify-content: center;
+  border: 0.3vw solid #000;
+  border-radius: 4px;
+  color: #000;
+  text-decoration: none;
+}
+@media only screen and (max-width: 800px) {
+  body {
+    font: 5vw/1.4 Manrope;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  a.cont {
+    display: flex;
+    margin-top: 25px;
+    border-width: 0.4vw;
+    padding: 50px;
+  }
+}
