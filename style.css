@@ -7,6 +7,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   background: #F5F5F5;
+  color: #333;
   font: 2.5vw/1.4 Manrope;
 }
 p {
@@ -45,13 +46,13 @@ a.cont {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  background: #555;
+  background: #333;
   color: #fff;
   text-decoration: none;
 }
 a.cont:hover {
   background: #FFE12E;
-  color: #000;
+  color: #333;
 }
 @media only screen and (max-width: 800px) {
   body {
