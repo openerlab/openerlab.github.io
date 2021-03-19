@@ -8,7 +8,7 @@ body {
   margin: 0;
   background: #F5F5F5;
   color: #333;
-  font: 2.5vw/1.4 'reason-new';
+  font: 2vw/1.3 'reason-new';
   letter-spacing: -0.025em;
 }
 a {
@@ -34,7 +34,7 @@ p {
   height: 100%;
 }
 .text-box {
-  margin-right: 5%;
+  margin-right: 50%;
 }
 .footer {
   display: flex;
@@ -60,6 +60,9 @@ a.cont:hover {
 @media only screen and (max-width: 800px) {
   body {
     font: 4vw/1.4 'reason-new';
+  }
+  .text-box {
+    margin-right: 5%;
   }
   .footer {
     flex-direction: column;
