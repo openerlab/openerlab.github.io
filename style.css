@@ -8,10 +8,14 @@ body {
   margin: 0;
   background: #F5F5F5;
   color: #333;
-  font: 2.5vw/1.4 Manrope;
+  font: 2.5vw/1.4 'reason-new';
+  letter-spacing: -0.025em;
+}
+a {
+  color: inherit;
 }
 p {
-  font: 20px/1.5 Manrope;
+  font: 20px/1.5 'reason-new';
 }
 .header {
   padding: 25px;
@@ -37,7 +41,6 @@ p {
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
-  background: #fff;
   padding: 25px;
 }
 a.cont {
@@ -56,7 +59,7 @@ a.cont:hover {
 }
 @media only screen and (max-width: 800px) {
   body {
-    font: 5vw/1.4 Manrope;
+    font: 4vw/1.4 'reason-new';
   }
   .footer {
     flex-direction: column;
