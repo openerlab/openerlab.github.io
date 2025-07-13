@@ -1,24 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Opener</title>
-    <link rel="stylesheet" href="https://use.typekit.net/mqc4oel.css">
-    <link rel="stylesheet" href="style.css">
-  </head>
+    <meta charset="UTF-8" />
+    <title>Opener — Messaging consultancy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Opener is a consultancy built on one idea: respect the user’s space. We help teams design messaging that earns trust and loyalty — across email, push, SMS and more." />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Univers Next Pro", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #000;
+        font-weight: 400;
+      }
 
+      .section {
+        height: 100vh;
+        padding: 40px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .bg1 {
+        background: #ffffff;
+        color: #000;
+      }
+      .bg2 {
+        background: #f5f5f5;
+        color: #111;
+      }
+      .bg3 {
+        background: #eeeeee;
+        color: #222;
+      }
+      .bg4 {
+        background: #e6e6e6;
+        color: #333;
+      }
+
+      .top,
+      .bottom {
+        display: grid;
+        gap: 40px;
+      }
+
+      .one-col {
+        grid-template-columns: 1fr;
+        font-size: 100px;
+        line-height: 1.1;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+        font-size: 50px;
+        color: #333;
+      }
+
+      .three-col {
+        grid-template-columns: 1fr 1fr 1fr;
+        font-size: 25px;
+        color: #666;
+      }
+
+      .four-col {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        font-size: 15px;
+        color: #999;
+      }
+
+      .cta {
+        font-size: 100px;
+        padding: 20px 40px;
+        border-radius: 100px;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 20px;
+        white-space: nowrap;
+      }
+
+      .primary {
+        background: #000;
+        color: #fff;
+      }
+      .secondary {
+        background: #e6e6e6;
+        color: #111;
+      }
+
+      @media (max-width: 768px) {
+        .section {
+          padding: 24px;
+        }
+        .one-col {
+          font-size: 48px;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+          font-size: 32px;
+        }
+        .three-col {
+          grid-template-columns: 1fr;
+          font-size: 20px;
+        }
+        .four-col {
+          grid-template-columns: 1fr;
+          font-size: 14px;
+        }
+        .cta {
+          font-size: 48px;
+          padding: 16px 32px;
+          margin-bottom: 20px;
+          display: block;
+        }
+      }
+    </style>
+  </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <div class="logo"><img src="logo.png" alt=""></div>
+    <!-- Hero -->
+    <div class="section bg1">
+      <div class="top one-col">Opener</div>
+      <div class="bottom one-col">Respect the user's space</div>
+    </div>
+
+    <!-- Positioning -->
+    <div class="section bg2">
+      <div class="top one-col">We help teams treat messaging with respect</div>
+      <div class="bottom two-col">
+        <div>Inbox. Lock screen. Notification tray.</div>
+        <div>These are not marketing channels. They’re trust channels.</div>
       </div>
-      <div class="footer">
-        <div class="text-box">Opener är en idéell förening som <div class="one">➀</div> samlar kommunikatörer och utvecklare och aktiverar dem i samhällsnära open source-projekt, <div class="two">➁</div> svarar på remisser vid upphandlingar av digitala tjänster, och <div class="three">➂</div> fortbilda våra medlemmar inom civic tech. Nyfiken på att veta mer? Maila <a href="mailto:viktor@opener.se">viktor@opener.se</a>!</div>
+    </div>
+
+    <!-- Belief -->
+    <div class="section bg3">
+      <div class="top one-col">Why it works</div>
+      <div class="bottom three-col">
+        <div>Respect earns attention</div>
+        <div>Attention earns trust</div>
+        <div>Trust earns loyalty</div>
+      </div>
+    </div>
+
+    <!-- What we do -->
+    <div class="section bg4">
+      <div class="top one-col">What we offer</div>
+      <div class="bottom four-col">
+        <div>Strategy</div>
+        <div>System design</div>
+        <div>Implementation</div>
+        <div>Ongoing support</div>
+      </div>
+    </div>
+
+    <!-- Proof -->
+    <div class="section bg1" id="case-studies">
+      <div class="top one-col">Selected work</div>
+      <div class="bottom four-col">
+        <div>Retail: 90+ messages, 30 markets</div>
+        <div>Fintech: 4 channels, 1 system</div>
+        <div>Mobility: product relaunch</div>
+        <div>Built with product, design, dev</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="section bg2">
+      <div class="top one-col">Let’s talk about your messaging layer</div>
+      <div class="bottom two-col">
+        <a href="mailto:hello@opener.se" class="cta primary">Book a call</a>
+        <a href="#case-studies" class="cta secondary">See examples</a>
       </div>
     </div>
   </body>
-
 </html>
