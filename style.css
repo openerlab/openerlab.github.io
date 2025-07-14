@@ -1,80 +1,282 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
-html,
-body {
-  height: 100%;
+/* Font scale using golden ratio */
+:root {
+  --step-0: 100px; /* Base */
+  --step-1: 61.8px; /* 100 / φ */
+  --step-2: 38.2px; /* step-1 / φ */
+  --step-3: 23.6px; /* step-2 / φ */
+  --step-4: 14.6px; /* step-3 / φ */
+  --step-5: 9px; /* step-4 / φ */
+  --line-height: 1.4;
+  --nav-height: 0px; /* Set nav height variable for use in section height calculation */
 }
+
+html {
+  font-size: 100%; /* Allows rem scaling */
+  scroll-behavior: smooth; /* Enable smooth scrolling globally */
+  scroll-snap-type: y mandatory;
+}
+
 body {
-  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  color: #181a1b;
   background: #fff;
-  color: #273248;
-  font: 2.5vw/1.3 'reason-new';
-  letter-spacing: -0.025em;
+  font-size: var(--step-2);
+  line-height: var(--line-height);
+  scroll-snap-type: y mandatory;
 }
-a {
-  color: inherit;
-}
-.header {
-  padding: 25px;
-}
-.logo {
-  width: 10%;
-}
-.logo img {
-  width: 100%;
-}
-.container {
+
+/* Sections */
+.section {
+  height: calc(100vh - var(--nav-height));
+  padding: 3%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: space-between;
-  height: 100%;
+  scroll-margin-top: var(--nav-height);
+  scroll-snap-align: start;
 }
-.text-box {
-  margin-right: 33%;
-}
-.footer {
+
+.section .bottom {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: space-between;
-  padding: 25px;
-}
-.one, .two, .three {
-  display: inline;
-  color: #FF7130;
-}
-a.cont {
-  display: flex;
-  flex: 0 0 25%;
+  gap: 1em;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  background: #333;
-  color: #fff;
-  text-decoration: none;
+  justify-content: flex-start;
 }
-a.cont:hover {
-  background: #FFE12E;
-  color: #333;
+
+/* Only make .bottom a flex row for the CTA section */
+.section#book .bottom {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
 }
-@media only screen and (max-width: 800px) {
-  body {
-    font: 4vw/1.4 'reason-new';
-  }
-  .logo {
-    width: 20%;
-  }
-  .text-box {
-    margin-right: 5%;
-  }
-  .footer {
+
+@media (max-width: 768px) {
+  .section#book .bottom {
     flex-direction: column;
     align-items: stretch;
+    gap: 1em;
   }
-  a.cont {
-    display: flex;
-    margin-top: 25px;
-    padding: 50px;
+}
+
+/* Background color groups */
+.bg1 {
+  background: #fff;
+  color: #181a1b;
+}
+.bg2 {
+  background: #f5f5f5;
+  color: #111;
+}
+.bg3 {
+  background: #eeeeee;
+  color: #222;
+}
+.bg4 {
+  background: #e6e6e6;
+  color: #333;
+}
+
+/* Layout */
+.top,
+.bottom {
+  display: grid;
+  gap: 3%;
+}
+
+.one-col {
+  grid-template-columns: 1fr;
+  font-family: "Inter Tight", sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.1;
+}
+
+.secondary-one-col {
+  font-family: "Inter Tight", sans-serif;
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+
+.two-col {
+  grid-template-columns: 1fr 1fr;
+  font-family: "Inter Tight", sans-serif;
+  font-size: var(--step-2);
+  color: rgba(24, 26, 27, 0.7);
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+.three-col {
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: var(--step-3);
+  color: #666;
+  line-height: 1.4;
+}
+
+.four-col {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  font-size: var(--step-4);
+  color: #999;
+  line-height: 1.5;
+}
+
+/* Typography overrides */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--step-0);
+  line-height: 1.1;
+}
+h2 {
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+h3 {
+  font-size: var(--step-2);
+  line-height: 1.3;
+}
+h4 {
+  font-size: var(--step-3);
+  line-height: 1.4;
+}
+
+p {
+  font-size: var(--step-3);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Services section */
+.service-headline {
+  font-size: var(--step-3);
+  font-family: "Inter Tight", sans-serif;
+  line-height: 1.5;
+}
+
+.service-body {
+  font-size: var(--step-4);
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* CTA buttons */
+.cta {
+  font-size: var(--step-2);
+  padding: 1em 1.5em;
+  border-radius: 100px;
+  text-decoration: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cta.primary {
+  background: #181a1b;
+  color: #fff;
+}
+
+.cta.secondary {
+  background: #e6e6e6;
+  color: #111;
+}
+
+a {
+  cursor: pointer;
+}
+
+/* Remove all styling from links */
+nav.main-sticky-nav a {
+  all: unset;
+  cursor: pointer;
+}
+
+/* Add padding to the nav */
+nav.main-sticky-nav {
+  padding: 3%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  width: 100vw;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Remove sticky from nav inside header */
+header.section.bg1 nav.bottom.four-col {
+  position: static;
+  background: none;
+  z-index: auto;
+}
+
+/* Testimonials */
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+blockquote p {
+  font-style: italic;
+  margin-bottom: 0.5em;
+}
+
+blockquote footer {
+  font-size: var(--step-5);
+  opacity: 0.6;
+}
+
+/* JS to set --nav-height dynamically (add to your HTML):
+<script>
+  function setNavHeight() {
+    const nav = document.querySelector('nav.main-sticky-nav');
+    if (nav) {
+      document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 'px');
+    }
+  }
+  window.addEventListener('DOMContentLoaded', setNavHeight);
+  window.addEventListener('resize', setNavHeight);
+</script>
+*/
+
+/* Responsive */
+@media (max-width: 768px) {
+  .one-col {
+    font-size: var(--step-1);
+  }
+  .secondary-one-col {
+    font-size: var(--step-2);
+  }
+  .two-col {
+    grid-template-columns: 1fr;
+    font-size: var(--step-3);
+  }
+  .three-col {
+    grid-template-columns: 1fr;
+    font-size: var(--step-4);
+  }
+  .four-col {
+    grid-template-columns: 1fr;
+    font-size: var(--step-5);
+  }
+  .cta {
+    font-size: var(--step-3);
+    display: block;
+    margin-bottom: 1em;
+  }
+  .section .bottom {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1em;
   }
 }
