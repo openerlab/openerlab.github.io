@@ -2,181 +2,166 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Opener — Messaging consultancy</title>
+    <title>Viktor Edvardsson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Opener is a consultancy built on one idea: respect the user’s space. We help teams design messaging that earns trust and loyalty — across email, push, SMS and more." />
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Univers Next Pro", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: #fff;
-        color: #000;
-        font-weight: 400;
+      content="Viktor Edvardsson is a product designer focused on the messaging experience — the emails, push, and notifications that support your product and deepen the bond between you and your users." />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400&family=Inter:wght@400&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      function setNavHeight() {
+        const nav = document.querySelector("nav.main-sticky-nav");
+        if (nav) {
+          document.documentElement.style.setProperty(
+            "--nav-height",
+            nav.offsetHeight + "px"
+          );
+        }
       }
+      window.addEventListener("DOMContentLoaded", setNavHeight);
+      window.addEventListener("resize", setNavHeight);
 
-      .section {
-        height: 100vh;
-        padding: 40px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      // Offset scroll position for anchor links so section appears below sticky nav
+      function offsetAnchorScroll(e) {
+        if (e.target.tagName === "A" && e.target.hash) {
+          const nav = document.querySelector("nav.main-sticky-nav");
+          const target = document.querySelector(e.target.hash);
+          if (target && nav) {
+            e.preventDefault();
+            const navHeight = nav.offsetHeight;
+            // Calculate the scroll offset so the section's bottom aligns with the viewport's bottom
+            const sectionHeight = target.offsetHeight;
+            const scrollY =
+              target.offsetTop + sectionHeight - window.innerHeight + navHeight;
+            window.scrollTo({
+              top: scrollY,
+              behavior: "smooth",
+            });
+            history.pushState(null, "", e.target.hash);
+          }
+        }
       }
+      document
+        .querySelector("nav.main-sticky-nav")
+        .addEventListener("click", offsetAnchorScroll);
 
-      .bg1 {
-        background: #ffffff;
-        color: #000;
-      }
-      .bg2 {
-        background: #f5f5f5;
-        color: #111;
-      }
-      .bg3 {
-        background: #eeeeee;
-        color: #222;
-      }
-      .bg4 {
-        background: #e6e6e6;
-        color: #333;
-      }
-
-      .top,
-      .bottom {
-        display: grid;
-        gap: 40px;
-      }
-
-      .one-col {
-        grid-template-columns: 1fr;
-        font-size: 100px;
-        line-height: 1.1;
-      }
-
-      .two-col {
-        grid-template-columns: 1fr 1fr;
-        font-size: 50px;
-        color: #333;
-      }
-
-      .three-col {
-        grid-template-columns: 1fr 1fr 1fr;
-        font-size: 25px;
-        color: #666;
-      }
-
-      .four-col {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        font-size: 15px;
-        color: #999;
-      }
-
-      .cta {
-        font-size: 100px;
-        padding: 20px 40px;
-        border-radius: 100px;
-        text-decoration: none;
-        display: inline-block;
-        margin-right: 20px;
-        white-space: nowrap;
-      }
-
-      .primary {
-        background: #000;
-        color: #fff;
-      }
-      .secondary {
-        background: #e6e6e6;
-        color: #111;
-      }
-
-      @media (max-width: 768px) {
+      // Add scroll snapping to sections
+      const style = document.createElement("style");
+      style.innerHTML = `
+        html, body {
+          scroll-snap-type: y mandatory;
+        }
         .section {
-          padding: 24px;
+          scroll-snap-align: start;
         }
-        .one-col {
-          font-size: 48px;
-        }
-        .two-col {
-          grid-template-columns: 1fr;
-          font-size: 32px;
-        }
-        .three-col {
-          grid-template-columns: 1fr;
-          font-size: 20px;
-        }
-        .four-col {
-          grid-template-columns: 1fr;
-          font-size: 14px;
-        }
-        .cta {
-          font-size: 48px;
-          padding: 16px 32px;
-          margin-bottom: 20px;
-          display: block;
-        }
-      }
-    </style>
+      `;
+      document.head.appendChild(style);
+    </script>
   </head>
   <body>
-    <!-- Hero -->
-    <div class="section bg1">
-      <div class="top one-col">Opener</div>
-      <div class="bottom one-col">Respect the inbox</div>
-    </div>
+    <nav class="main-sticky-nav bottom four-col" aria-label="Main navigation">
+      <a href="#mission">Mission</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#book">Book a meeting</a>
+    </nav>
+    <header class="section bg1" id="about">
+      <h1 class="bottom one-col secondary-one-col">
+        A respectful and relevant message experience deepens the bond between
+        you and your users
+      </h1>
+    </header>
 
-    <!-- Positioning -->
-    <div class="section bg2">
-      <div class="top one-col">We help teams treat messaging with respect</div>
+    <section class="section bg2" id="mission" tabindex="0">
+      <div class="top one-col secondary-one-col">
+        <h3>
+          I'm a product designer with a special interest in the often-overlooked
+          touchpoint layer of emails, SMS, and push. These support your product
+          and deepen the bond between you and your users.
+        </h3>
+      </div>
       <div class="bottom two-col">
-        <div>Inbox. Lock screen. Notification tray.</div>
-        <div>These are not marketing channels. They’re trust channels.</div>
+        <p>
+          It’s not about why the message should be sent. It’s about why it
+          should be received.
+        </p>
       </div>
-    </div>
-
-    <!-- Belief -->
-    <div class="section bg3">
-      <div class="top one-col">Why it works</div>
-      <div class="bottom three-col">
-        <div>Respect earns attention</div>
-        <div>Attention earns trust</div>
-        <div>Trust earns loyalty</div>
-      </div>
-    </div>
-
-    <!-- What we do -->
-    <div class="section bg4">
-      <div class="top one-col">What we offer</div>
+    </section>
+    <section class="section bg3" id="services" tabindex="0">
+      <header class="top one-col secondary-one-col">
+        <h2>I'll help you get there</h2>
+      </header>
       <div class="bottom four-col">
-        <div>Strategy</div>
-        <div>System design</div>
-        <div>Implementation</div>
-        <div>Ongoing support</div>
+        <article>
+          <h3 class="service-headline">Strategy</h3>
+          <p class="service-body">
+            Defining how messaging supports your product, service, and user
+            goals.
+          </p>
+        </article>
+        <article>
+          <h3 class="service-headline">Design</h3>
+          <p class="service-body">
+            Structure, tone, visual clarity. Built for attention, not
+            distraction.
+          </p>
+        </article>
+        <article>
+          <h3 class="service-headline">QA</h3>
+          <p class="service-body">
+            Testing real scenarios, systems, and user flows before go-live.
+          </p>
+        </article>
+        <article>
+          <h3 class="service-headline">Maintenance</h3>
+          <p class="service-body">
+            Monitoring and improving messaging over time across markets and
+            platforms.
+          </p>
+        </article>
       </div>
-    </div>
-
-    <!-- Proof -->
-    <div class="section bg1" id="case-studies">
-      <div class="top one-col">Selected work</div>
+    </section>
+    <section class="section bg4" id="testimonials" tabindex="0">
+      <header class="top one-col secondary-one-col">
+        <h2>Testimonials</h2>
+      </header>
       <div class="bottom four-col">
-        <div>Retail: 90+ messages, 30 markets</div>
-        <div>Fintech: 4 channels, 1 system</div>
-        <div>Mobility: product relaunch</div>
-        <div>Built with product, design, dev</div>
+        <blockquote>
+          <p>“Viktor made our messaging feel part of the product.”</p>
+          <footer>— Product Manager, SaaS</footer>
+        </blockquote>
+        <blockquote>
+          <p>
+            “Clarity, trust, and speed. That’s what Viktor helped us unlock.”
+          </p>
+          <footer>— Head of CX, Retail</footer>
+        </blockquote>
+        <blockquote>
+          <p>“A partner who understands design and implementation equally.”</p>
+          <footer>— UX Lead, Mobility</footer>
+        </blockquote>
+        <blockquote>
+          <p>
+            “Working with Viktor is like upgrading your whole communication
+            layer.”
+          </p>
+          <footer>— CTO, Fintech</footer>
+        </blockquote>
       </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="section bg2">
-      <div class="top one-col">Let’s talk about your messaging layer</div>
-      <div class="bottom two-col">
-        <a href="mailto:hello@opener.se" class="cta primary">Book a call</a>
-        <a href="#case-studies" class="cta secondary">See examples</a>
+    </section>
+    <section class="section bg1" id="book" tabindex="0">
+      <header class="top one-col secondary-one-col">
+        <h2>Give your users what they deserve</h2>
+      </header>
+      <div class="bottom">
+        <a href="mailto:hello@opener.se" class="cta primary">
+          Book an online call
+        </a>
+        <a href="#" class="cta secondary">Connect on LinkedIn</a>
       </div>
-    </div>
+    </section>
   </body>
 </html>
