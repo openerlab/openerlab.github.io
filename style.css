@@ -203,7 +203,7 @@ nav.main-sticky-nav a {
 
 /* Add padding to the nav */
 nav.main-sticky-nav {
-  padding: 3%;
+  padding: 2% 3%;
   position: sticky;
   top: 0;
   z-index: 1000;
