@@ -18,13 +18,13 @@ body {
 }
 
 /* Main section layout */
-.section {
+section {
   height: 100vh;
-  padding: 3%;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 /* Typography */
@@ -34,6 +34,7 @@ h1 {
   line-height: 1.1;
   font-weight: 400;
   margin: 0;
+  margin-bottom: 100px;
 }
 
 /* Logo icon */
