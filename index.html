@@ -26,3 +26,215 @@
     </section>
   </body>
 </html>
+
+<script>
+  (() => {
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const root = document.documentElement;
+
+    // Helper: conversions + contrast (WCAG 2.1)
+    const clamp01 = (v) => Math.min(1, Math.max(0, v));
+
+    const hexToRgb = (hex) => {
+      const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return m
+        ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)]
+        : [0, 0, 0];
+    };
+    const rgbToHex = ([r, g, b]) =>
+      "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
+
+    const rgbToHsl = ([r, g, b]) => {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      const max = Math.max(r, g, b),
+        min = Math.min(r, g, b);
+      let h = 0,
+        s = 0,
+        l = (max + min) / 2;
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r:
+            h = (g - b) / d + (g < b ? 6 : 0);
+            break;
+          case g:
+            h = (b - r) / d + 2;
+            break;
+          case b:
+            h = (r - g) / d + 4;
+            break;
+        }
+        h *= 60;
+      }
+      return [h, s, l];
+    };
+
+    const hslToRgb = ([h, s, l]) => {
+      const c = (1 - Math.abs(2 * l - 1)) * s;
+      const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+      const m = l - c / 2;
+      let r = 0,
+        g = 0,
+        b = 0;
+      if (0 <= h && h < 60) {
+        r = c;
+        g = x;
+        b = 0;
+      } else if (60 <= h && h < 120) {
+        r = x;
+        g = c;
+        b = 0;
+      } else if (120 <= h && h < 180) {
+        r = 0;
+        g = c;
+        b = x;
+      } else if (180 <= h && h < 240) {
+        r = 0;
+        g = x;
+        b = c;
+      } else if (240 <= h && h < 300) {
+        r = x;
+        g = 0;
+        b = c;
+      } else if (300 <= h && h < 360) {
+        r = c;
+        g = 0;
+        b = x;
+      }
+      r = Math.round((r + m) * 255);
+      g = Math.round((g + m) * 255);
+      b = Math.round((b + m) * 255);
+      return [r, g, b];
+    };
+
+    const relLum = ([r, g, b]) => {
+      const f = (v) => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      };
+      const R = f(r),
+        G = f(g),
+        B = f(b);
+      return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+    };
+
+    const contrast = (rgb1, rgb2) => {
+      const L1 = relLum(rgb1),
+        L2 = relLum(rgb2);
+      const [Lmax, Lmin] = L1 >= L2 ? [L1, L2] : [L2, L1];
+      return (Lmax + 0.05) / (Lmin + 0.05);
+    };
+
+    // Read initial colors from CSS variables
+    const getVar = (name) =>
+      getComputedStyle(root).getPropertyValue(name).trim();
+    const baseBgHex = getVar("--bg") || "#3cd070";
+    const baseFgHex = getVar("--fg") || "#ff8000";
+
+    const baseBgRgb = hexToRgb(baseBgHex);
+    const baseFgRgb = hexToRgb(baseFgHex);
+    const baseRatio = contrast(baseBgRgb, baseFgRgb);
+
+    const baseBgHsl = rgbToHsl(baseBgRgb);
+    const baseFgHsl = rgbToHsl(baseFgRgb);
+
+    // Determine which one was lighter initially (to keep that relationship)
+    const fgWasLighter = relLum(baseFgRgb) > relLum(baseBgRgb);
+
+    // Animate: rotate hue together; keep saturation similar; adjust fg lightness to keep contrast
+    const amplitudeDeg = 9; // subtle hue swing
+    const periodMs = 12000; // slow & gentle
+    const satWobble = 0.06; // small saturation wobble
+
+    function solveFgLightnessForContrast(
+      bgRgb,
+      fgHue,
+      fgSat,
+      targetRatio,
+      fgShouldBeLighter
+    ) {
+      // Binary search lightness 0..1 to hit target contrast
+      let lo = 0,
+        hi = 1,
+        bestL = 0.5,
+        it = 0;
+      for (; it < 24; it++) {
+        const mid = (lo + hi) / 2;
+        const fgRgb = hslToRgb([fgHue, fgSat, mid]);
+        const c = contrast(bgRgb, fgRgb);
+        const fgIsLighter = relLum(fgRgb) > relLum(bgRgb);
+        // Enforce the same light/dark relationship as the base
+        const relOk = fgIsLighter === fgShouldBeLighter;
+        if (!relOk) {
+          // Push in the direction that restores the relationship
+          if (fgShouldBeLighter) lo = mid;
+          else hi = mid;
+          continue;
+        }
+        bestL = mid;
+        if (c < targetRatio) {
+          // Need more separation: move L away from bg's L depending on which side we are
+          if (fgShouldBeLighter) hi = mid;
+          else lo = mid;
+        } else {
+          // We can try to get closer (less extreme) while still meeting ratio
+          if (fgShouldBeLighter) lo = mid;
+          else hi = mid;
+        }
+      }
+      return bestL;
+    }
+
+    let rafId;
+    function tick(now) {
+      const t = now || performance.now();
+      const phi = (t % periodMs) / periodMs; // 0..1
+      const hueDelta = amplitudeDeg * Math.sin(2 * Math.PI * phi);
+      const satDelta = satWobble * Math.sin(2 * Math.PI * (phi + 0.25));
+
+      // Next BG
+      const bgHue = (baseBgHsl[0] + hueDelta + 360) % 360;
+      const bgSat = clamp01(baseBgHsl[1] + satDelta);
+      const bgHsl = [bgHue, bgSat, baseBgHsl[2]];
+      const bgRgb = hslToRgb(bgHsl);
+
+      // Next FG: same hue rotation, similar saturation, compute L to keep contrast ratio
+      const fgHue = (baseFgHsl[0] + hueDelta + 360) % 360;
+      const fgSat = clamp01(baseFgHsl[1] + satDelta * 0.8);
+
+      const fgL = solveFgLightnessForContrast(
+        bgRgb,
+        fgHue,
+        fgSat,
+        baseRatio,
+        fgWasLighter
+      );
+      const fgRgb = hslToRgb([fgHue, fgSat, fgL]);
+
+      // Apply
+      root.style.setProperty("--bg", rgbToHex(bgRgb));
+      root.style.setProperty("--fg", rgbToHex(fgRgb));
+
+      rafId = requestAnimationFrame(tick);
+    }
+
+    if (!prefersReduced) {
+      rafId = requestAnimationFrame(tick);
+    }
+
+    // Stop animation when page is hidden (saves battery/CPU)
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else if (!prefersReduced) {
+        rafId = requestAnimationFrame(tick);
+      }
+    });
+  })();
+</script>
