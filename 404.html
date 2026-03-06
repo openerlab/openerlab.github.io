@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+  // GitHub Pages subdomain routing via 404 redirect trick
+  var host = window.location.hostname;
+  var path = window.location.pathname;
+  var subdomain = host.split('.')[0];
+  var rootDomain = host.split('.').slice(1).join('.');
+  
+  // If we're on a subdomain (e.g. underwater.opener.se) and the path isn't already in the subfolder
+  if (subdomain !== 'opener' && subdomain !== 'www' && rootDomain === 'opener.se') {
+    window.location.replace('https://opener.se/' + subdomain + path);
+  }
+</script>
+</head>
+<body></body>
+</html>
