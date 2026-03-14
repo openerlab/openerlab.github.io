@@ -25,9 +25,6 @@ jobs:
         working-directory: mon-amie
         run: python scrape_and_chart.py
 
-      - name: Copy chart to index.html
-        run: cp mon-amie/chart.html mon-amie/index.html
-
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

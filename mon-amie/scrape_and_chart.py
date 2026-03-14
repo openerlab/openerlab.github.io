@@ -23,7 +23,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 }
 DATA_DIR = Path(__file__).parent / "data"
-CHART_PATH = Path(__file__).parent / "chart.html"
+CHART_PATH = Path(__file__).parent / "index.html"
 
 
 def scrape_listings(max_pages=50):
