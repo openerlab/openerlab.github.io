@@ -92,15 +92,38 @@
           font-size: 17px;
         }
       }
+
+      #cycle {
+        display: inline-block;
+        opacity: 1;
+        transition: opacity 0.4s ease;
+      }
+
+      #cycle.fade {
+        opacity: 0;
+      }
     </style>
   </head>
   <body>
     <header>Opener</header>
     <p>
-      I advise agencies, enterprises, and vendors on how to move into and inside the new landscape of messaging.
+      I advise agencies, enterprises, and vendors on how to move into and inside the new landscape of <span id="cycle">transactional</span> messaging.
       <br />
       <br />
       Ping me on <a href="https://www.linkedin.com/in/viktoredvardsson/">LinkedIn</a> or send me an email at <a href="mailto:viktor@opener.se">viktor@opener.se</a>.
     </p>
+    <script>
+      const words = ["transactional", "service", "utility", "proactive", "last mile"];
+      const el = document.getElementById("cycle");
+      let i = 0;
+      setInterval(() => {
+        el.classList.add("fade");
+        setTimeout(() => {
+          i = (i + 1) % words.length;
+          el.textContent = words[i];
+          el.classList.remove("fade");
+        }, 400);
+      }, 2500);
+    </script>
   </body>
 </html>
